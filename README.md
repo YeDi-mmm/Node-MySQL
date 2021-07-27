@@ -7,8 +7,8 @@
 
 + 配置文件
 
-解压后，在 MySQL 根目录下新建 `data` 文件夹和 `my.ini` 配置文件，其中 `my.ini`
-配置文件内容如下，其他参数可自行配置：
+> 解压后，在 MySQL 根目录下新建 `data` 文件夹和 `my.ini` 配置文件，其中 `my.ini`
+> 配置文件内容如下，其他参数可自行配置
 
 ```mysql
 [mysql]
@@ -36,16 +36,17 @@ character-set-server=utf8
 # 创建新表时将使用的默认存储引擎
 default-storage-engine=INNODB
 ```
+
 + 初始化和安装
 
-使用管理员身份进入 `cmd` ，进入 MySQL 安装目录下的 `bin` 目录，依次输入以下命令：
+> 使用管理员身份进入 `cmd` ，进入 MySQL 安装目录下的 `bin` 目录，依次输入以下命令：
 
 ```
 mysqld --initialize
 
 mysqld --install
 ```
-其中，`mysqld --initialize`会进行初始化，在 `data` 目录下生成相关文件；在初始化成功后使用 `mysqld --install` 命令进行安装。
+> 其中，`mysqld --initialize`会进行初始化，在 `data` 目录下生成相关文件；在初始化成功后使用 `mysqld --install` 命令进行安装。
 
 + 启动服务和修改密码
 
@@ -74,7 +75,7 @@ CREATE USER 'foo'@'localhost' IDENTIFIED WITH mysql_native_password BY 'bar';
 ```
 
 ### 2. MySQL的安装配置
->请自行查找相关资料
+> 请自行查找相关资料
 
 ### 3. 在Nodejs中使用MySQL
 
@@ -182,7 +183,7 @@ CREATE USER 'foo'@'localhost' IDENTIFIED WITH mysql_native_password BY 'bar';
 
 * 条件控制语句: WHERE
   
-  >SELECT * FROM tb_name WHERE id=3;
+  > SELECT * FROM tb_name WHERE id=3;
 
   - 相关条件控制符： 
     + =、>、<、<>、IN(1,2,3......)、BETWEEN a AND b
