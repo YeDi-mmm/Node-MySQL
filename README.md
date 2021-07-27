@@ -197,3 +197,60 @@ CREATE USER 'foo'@'localhost' IDENTIFIED WITH mysql_native_password BY 'bar';
   - 排序 ORDER BY
     - asc 升序（默认）
     - desc 降序
+
+### 4. 安装数据库可视化工具
+> 目录下Navicat Premium.zip解压，按照说明书使用
+
+### 5. token校验说明
+> src/utils/token
+
++ 安装Json Web Token模块
+  
+```jwt
+# npm install jsonwebtoken
+```
+
++ 方法说明
+
+> const jwt = require('jsonwebtoken'); // Token的生成与校验
+  
+```js
+/**
+ * 创建token
+ * @param {String} data 加密数据
+ * @param {Number} expiresIn 有效期（单位:s）
+ * @param {String} secret 签名
+ */ 
+jwt.sign({ data }, secret, { expiresIn});
+```
+```js
+/**
+ * 检查用户token是否可用
+ * @param {String} data 加密数据
+ * @param {Number} expiresIn 有效期（单位:s）
+ */ 
+jwt.verify(token, secret);
+```
+
+> 因`jsonwebtoken`创建后的token无法删除，无法修改等，用户退出登陆后，token依旧生效中。
+
+> 处理方法：登陆时往数据库保存token中的过期时间，退出登陆后修改数据库中过期时间，请求先判断token中过期时>间是否与数据库中过期时间一致，否则判用户已退出登陆，token失效；
+
+```js
+/**
+ * 检查用户token在非过期时间是否已经退出登陆
+ * @param {String} token 用户token
+ * @param {Function} query 当前连接的数据库
+ * @param {String} colName 当前的数据库表名
+ */
+function checkTokenAvailable(token, query, colName) {
+  if (verify(token)) {
+    let { data, exp } = jwt.decode(token);
+    let sql = `select username from ${colName} where username='${data}' AND SignInTime='${exp}'`;
+    let result = await query(sql);
+    return result.length > 0 ? true : false
+  } else {
+    return false
+  }
+}
+```
