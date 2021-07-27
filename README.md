@@ -227,7 +227,7 @@ jwt.sign({ data }, secret, { expiresIn});
 /**
  * 检查用户token是否可用
  * @param {String} data 加密数据
- * @param {Number} expiresIn 有效期（单位:s）
+ * @param {String} secret 签名
  */ 
 jwt.verify(token, secret);
 ```
