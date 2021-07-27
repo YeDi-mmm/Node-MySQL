@@ -1,0 +1,8 @@
+{
+  "PORT": 3838,
+  "BaseUrl": "127.0.0.1",
+  "user": "root",
+  "password": "aa1234",
+  "BaseName": "tb_test",
+  "secret": "datlere"
+}
